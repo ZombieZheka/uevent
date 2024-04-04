@@ -1,8 +1,11 @@
 // server/tests/index.test.js
 
 const fs = require('fs');
+require('dotenv').config();
 const path = require('path');
 const basename = path.basename(__filename);
+
+// const email = require('../services/email.service');
 
 const tests = {};
 
@@ -21,11 +24,36 @@ fs.readdirSync(__dirname)
   tests[name] = test;
 });
 
-const delimiter = '------------------------------';
-console.log(delimiter);
+const delimiter = '------------------------------------------------------------';
 
-for (const testName in tests) {
-  const testValue = tests[testName];
-  console.log(` ${testName} |`, testValue);
+/**
+ * Runs through all exported tests in /tests folder.
+ */
+async function runTests() {
+  // const mailOptions = {
+  //   from: process.env.EMAIL,
+  //   to: process.env.TEST_EMAIL,
+  //   subject: 'Congratulations',
+  //   text: 'Thank you for registration in Uevent!',
+  // };
+  // console.log(`EMAIL: ${process.env.EMAIL}`);
+  // console.log(`EMAIL_APP_CODE: ${process.env.EMAIL_APP_CODE}`);
+  // console.log(`EMAIL_APP_CODE: ${process.env.TEST_EMAIL}`);
+  // await email.sendEmail(mailOptions);
+
   console.log(delimiter);
+
+  for (const moduleName in tests) {
+    const moduleTests = tests[moduleName];
+    console.log(`Running tests from ${moduleName} module:`);
+    console.log(delimiter);
+    for (const testName in moduleTests) {
+      const testFunction = moduleTests[testName];
+      const testResult = await testFunction(); // Викликаємо функцію тесту
+      console.log(` ${testName} |`, testResult);
+    }
+    console.log(delimiter);
+  }
 }
+
+runTests();
