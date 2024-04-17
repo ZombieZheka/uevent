@@ -1,6 +1,9 @@
 // server/services/email.service.js
 
+const path = require('path');
 const nodemailer = require('nodemailer');
+const hbs = require('nodemailer-express-handlebars');
+
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   host: "smtp.gmail.com",
@@ -11,6 +14,14 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_APP_CODE
   }
 });
+const handlebarOptions = {
+  viewEngine: {
+    partialsDir: path.resolve('public/views/'),
+    defaultLayout: false,
+  },
+  viewPath: path.resolve('public/views/'),
+};
+transporter.use('compile', hbs(handlebarOptions))
 
 /**
  * @param {Object} options mail options,
@@ -24,7 +35,6 @@ async function sendEmail(options) {
   return await transporter.sendMail(options, (error, info) => {
     if (error) {
       throw error;
-      // return ` ${__filename} | Error sending email: ${error}`;
     } else {
       return ` ${__filename} | Email send: ${info.response}`;
     }
@@ -39,12 +49,16 @@ async function sendEmail(options) {
  * @throws error
  * @returns message about error or success
  */
-async function sendConfirmationCode(email, code) {
+async function sendConfirmation(email, link) {
   const mailOptions = {
-    from: process.env.EMAIL,
+    template: 'confirmation',
+    context: {
+      link
+    },
+
+    from: 'Usof Team',
     to: email,
-    subject: 'Registration',
-    text: `Confirm your email address: ${code}`
+    subject: 'Confirm your email'
   };
   return await sendEmail(mailOptions);
 }
@@ -52,16 +66,21 @@ async function sendConfirmationCode(email, code) {
 /**
  * Sends congratulation when user finishes registration.
  * @param {String} email email address
+ * @param {String} name name of recepient
  * 
  * @throws error
  * @returns message about error or success
  */
-async function sendCongratulations(email) {
+async function sendCongratulations(email, name) {
   const mailOptions = {
-    from: process.env.EMAIL,
+    template: 'congratulations',
+    context: {
+      name
+    },
+
+    from: 'Usof Team',
     to: email,
-    subject: 'Congratulations',
-    text: 'Thank you for registration in Uevent!',
+    subject: 'Congratulations'
   };
   return await sendEmail(mailOptions);
 }
@@ -74,20 +93,23 @@ async function sendCongratulations(email) {
  * @throws error
  * @returns message about error or success
  */
-async function sendResetLink(email, link) {
+async function sendReset(email, link) {
   const mailOptions = {
-    from: process.env.EMAIL,
+    template: 'reset',
+    context: {
+      link
+    },
+
+    from: 'Usof Team',
     to: email,
-    subject: 'Reset Password',
-    text: `Click on link below to reset your password:\n`
-          + link,
+    subject: 'Reset Password'
   };
   return await sendEmail(mailOptions);
 }
 
 module.exports = {
   sendEmail,
-  sendConfirmationCode,
+  sendConfirmation,
   sendCongratulations,
-  sendResetLink
+  sendReset
 }
