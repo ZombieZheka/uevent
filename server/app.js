@@ -9,6 +9,7 @@ const dbConnection = require("./config/database");
 dotevn.config();
 const root = path.resolve(__dirname);
 process.env.MODELS = path.join(root, 'models/index');
+process.env.PUBLIC_DIR = path.join(root, 'public/index');
 // process.env.CONFIG = path.join(root, 'config/index');
 process.env.SERVICES = path.join(root, 'services/index.service');
 process.env.MIDDLEWARES = path.join(root, 'middlewares/index.middleware');
