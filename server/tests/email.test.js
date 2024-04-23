@@ -24,7 +24,7 @@ async function sendResetTest() {
 }
 
 module.exports = {
-  sendConfirmationTest,
-  sendCongratulationsTest,
-  sendResetTest
+  // sendConfirmationTest,
+  // sendCongratulationsTest,
+  // sendResetTest
 }

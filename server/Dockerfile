@@ -35,4 +35,5 @@ COPY . .
 EXPOSE 3812
 
 # Run the application.
-CMD npm start
+# CMD npm start
+CMD npm test
