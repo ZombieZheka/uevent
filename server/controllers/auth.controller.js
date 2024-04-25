@@ -1,11 +1,12 @@
 // server/controllers/auth.controller.js
 
 const bcryptjs = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const {
   User
 } = require(process.env.MODELS);
 const {
-  email
+  emailService
 } = require(process.env.SERVICES);
 
 module.exports = {
@@ -33,13 +34,13 @@ module.exports = {
         });
       }
 
-      User.create({
+      await User.create({
         firstName,
         secondName,
         email,
         password
       });
-      email.sendCongratulations(email);
+      emailService.sendCongratulations(email, firstName);
     } catch (error) {
       console.error(error);
       res.status(500);
@@ -64,7 +65,7 @@ module.exports = {
 
     try {
       const user = await User.findOne({ email });
-      // searchin user with specified email
+      // searching user with specified email
       if (!user) {
         res.status(400);
         return res.json({
@@ -83,9 +84,9 @@ module.exports = {
       // generating token
       const token = jwt.sign({
         id: user.id,
-        login: user.login,
-        role: user.role
-      }, process.env.TOKEN_SECRET, {
+        firstName: user.firstName,
+        secondName: user.secondName
+      }, process.env.JWT_SECRET_KEY, {
         expiresIn: '7d'
       });
       // saving token in cookies
@@ -117,7 +118,7 @@ module.exports = {
    */
   logout: (res) => {
     res.clearCookie('authToken');
-    res.status(200)
+    res.status(200);
     return res.json({
       success: true,
       message: 'Logged out'

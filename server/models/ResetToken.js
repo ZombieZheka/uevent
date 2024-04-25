@@ -5,7 +5,6 @@ const {
   Types,
   model
 } = require("mongoose");
-const { v4: uuidv4 } = require('uuid');
 const randToken = require('rand-token');
 
 const ResetTokenShema = Schema({

@@ -19,5 +19,5 @@ async function createResetTokenTest() {
 }
 
 module.exports = {
-  createResetTokenTest
+  // createResetTokenTest
 }

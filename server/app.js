@@ -4,7 +4,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const dotevn = require('dotenv');
 const dbConnection = require("./config/database");
-const runTests = require('./tests/index.test');
 
 // dotenv setup
 dotevn.config();
@@ -52,6 +51,7 @@ app.use(function(err, req, res, next) {
 });
 
 if (process.env.NODE_ENV === 'test') {
+  const runTests = require('./tests/index.test');
   runTests();
 }
 
