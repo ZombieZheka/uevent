@@ -4,6 +4,8 @@ const path = require('path');
 const nodemailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars');
 
+console.log(` ${__filename} | EMAIL = ${process.env.EMAIL}`);
+console.log(` ${__filename} | EMAIL_APP_CODE = ${process.env.EMAIL_APP_CODE}`);
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   host: "smtp.gmail.com",

@@ -17,7 +17,7 @@ fs.readdirSync(__dirname)
   })
 .forEach(file => {
   const service = require(path.join(__dirname, file));
-  const name = file.replace('.service.js', '');
+  const name = file.replace('.service.js', '') + 'Service';
   services[name] = service;
 });
 

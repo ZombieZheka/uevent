@@ -1,9 +1,13 @@
 // server/tests/index.test.js
 
 const fs = require('fs');
-require('dotenv').config();
 const path = require('path');
 const basename = path.basename(__filename);
+
+// const {
+  // User,
+  // ResetToken
+// } = require(process.env.MODELS);
 
 const tests = {};
 
@@ -28,8 +32,10 @@ const delimiter = '------------------------------------------------------------'
  * Runs through all exported tests in /tests folder.
  */
 async function runTests() {
-  console.log(delimiter);
+  // await User.collection.drop();
+  // await ResetToken.collection.drop();
 
+  console.log(delimiter);
   for (const moduleName in tests) {
     const moduleTests = tests[moduleName];
     console.log(`Running tests from ${moduleName} module:`);
@@ -43,4 +49,6 @@ async function runTests() {
   }
 }
 
-runTests();
+// runTests();
+
+module.exports = runTests;
