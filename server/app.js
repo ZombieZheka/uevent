@@ -15,8 +15,6 @@ process.env.SERVICES = path.join(root, 'services/index.service');
 process.env.MIDDLEWARES = path.join(root, 'middlewares/index.middleware');
 process.env.CONTROLLERS = path.join(root, 'controllers/index.controller');
 
-console.log(` ${__filename} | PUBLIC_DIR=${process.env.PUBLIC_DIR}`);
-
 // database setup
 dbConnection();
 

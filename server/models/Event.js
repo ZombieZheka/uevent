@@ -20,16 +20,42 @@ const EventSchema = Schema({
   description: {
     type: String
   },
+  owner: {
+    type: Types.ObjectId,
+    ref: 'User',
+    required: [true, "Owner is required"]
+  },
+  publicity: {
+    type: String,
+    enum: ['private', 'public'],
+    default: 'private',
+    required: [true, "Publicity is required"]
+  },
   price: {
-    number,
-    currency: {
-      type: String,
-      enum: ['UAN', 'USD', 'EUR']
-    },
-    default: {
-      number: 0,
-      currency: null
-    }
+    type: Number,
+    // number: {
+    //   type: Number,
+    //   default: null
+    // }
+    // currency: {
+    //   type: String,
+    //   enum: ['UAN', 'USD', 'EUR'],
+    //   default: 'UAN'
+    // },
+    default: 0,
+    min: 0
+  },
+  capacity: {
+    type: Number,
+    default: null
+  },
+  startDate: {
+    type: Date,
+    required: [true, "Start Date is required"]
+  },
+  endDate: {
+    type: Date,
+    required: [true, "End Date is required"]
   },
   images: [{
     data: Buffer,
@@ -37,7 +63,7 @@ const EventSchema = Schema({
   }]
 });
 
-EventSchema.methods.toJSON = () => {
+EventSchema.methods.toJSON = function () {
   const { _id, __v, ...event } = this.toObject();
   return event;
 }

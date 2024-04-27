@@ -1,5 +1,7 @@
 // server/controllers/layout.controller.js
 
+const jwt = require('jsonwebtoken');
+
 module.exports = {
   /**
    * Reads authentification token
@@ -7,15 +9,15 @@ module.exports = {
    * @param {Response} res response
    * @param {Function} next next handler
    */
-  authentificate: (req, res, next) => {
-    const token = req.cookies.token;
+  authentificate: async (req, res, next) => {
+    const token = req.cookies.authToken;
 
     if (!token) {
       req.authentificated = false;
       return next();
     }
 
-    jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
+    await jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
       if (err) {
         console.error(err);
         res.status(500);
@@ -46,7 +48,7 @@ module.exports = {
       return res.json({
         success: false,
         message: 'Authentification required'
-      })
+      });
     }
     next();
   }
