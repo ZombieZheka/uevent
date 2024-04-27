@@ -4,8 +4,8 @@ const path = require('path');
 const nodemailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars');
 
-console.log(` ${__filename} | EMAIL = ${process.env.EMAIL}`);
-console.log(` ${__filename} | EMAIL_APP_CODE = ${process.env.EMAIL_APP_CODE}`);
+// console.log(` ${__filename} | EMAIL = ${process.env.EMAIL}`);
+// console.log(` ${__filename} | EMAIL_APP_CODE = ${process.env.EMAIL_APP_CODE}`);
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   host: "smtp.gmail.com",
@@ -28,7 +28,7 @@ transporter.use('compile', hbs(handlebarOptions))
 /**
  * @param {Object} options mail options,
  * which includes "from", "to",
- * "subject" and "text" fields.
+ * "subject" and "context" fields.
  * 
  * @throws error
  * @returns message about error or success
