@@ -4,6 +4,11 @@ const fs = require('fs');
 const path = require('path');
 const basename = path.basename(__filename);
 
+// const {
+  // User,
+  // ResetToken
+// } = require(process.env.MODELS);
+
 const tests = {};
 
 fs.readdirSync(__dirname)
@@ -21,11 +26,29 @@ fs.readdirSync(__dirname)
   tests[name] = test;
 });
 
-const delimiter = '------------------------------';
-console.log(delimiter);
+const delimiter = '------------------------------------------------------------';
 
-for (const testName in tests) {
-  const testValue = tests[testName];
-  console.log(` ${testName} |`, testValue);
+/**
+ * Runs through all exported tests in /tests folder.
+ */
+async function runTests() {
+  // await User.collection.drop();
+  // await ResetToken.collection.drop();
+
   console.log(delimiter);
+  for (const moduleName in tests) {
+    const moduleTests = tests[moduleName];
+    console.log(`Running tests from ${moduleName} module:`);
+    console.log(delimiter);
+    for (const testName in moduleTests) {
+      const testFunction = moduleTests[testName];
+      const testResult = await testFunction();
+      console.log(` ${testName} |`, testResult);
+    }
+    console.log(delimiter);
+  }
 }
+
+// runTests();
+
+module.exports = runTests;

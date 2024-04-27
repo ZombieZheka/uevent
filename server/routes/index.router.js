@@ -7,6 +7,10 @@ const basename = path.basename(__filename);
 const express = require('express');
 const router = express.Router();
 
+const paymentRouter = require('./payment.router');
+
+router.use('/payment', paymentRouter);
+
 fs.readdirSync(__dirname)
 .filter(file => {
   return (
