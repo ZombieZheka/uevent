@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Lugrasimo&display=swap');
+
+.App {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #ecb78c;
+  color: aliceblue;
+}
+
+.App h1 {
+  text-align: center;
+  font-size: 70px;
+  
+}
+
+.App h3 {
+  position: relative;
+  text-align: center;
+  font-size: 50px;
+  top: -20px;
+}
+
+.formInput input {
+  border: 1px solid rgba(252, 252, 252, 0.4);
+  background-color: rgba(252, 252, 252, 0.2);
+  width: 250px;
+  border-radius: 3px;
+  font-family: "Source Sans Pro", sans-serif;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+  font-weight: 300;
+}
+
+.App button {
+  appearance: none;
+  outline: 0;
+  background-color: white;
+  border: 0;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  color: #a37550;
+  border-radius: 3px;
+  width: 250px;
+  font-size: 18px;
+}
+
+.App form div {
+  /* background-color: #000; */
+  color: #fff;
+  opacity: 0.5;
+  width: 100%;
+}
+
+.formInput span {
+  text-align: center;
+  font-size: 15px;
+  font-family: monospace;
+  padding: 3px;
+  color: rgb(73, 0, 0);
+  display: none;
+}
+
+
+.user-duplicate {
+  padding: 10px;
+  font-size: 25px;
+  color: rgb(73, 0, 0);
+}
+
+.user-created {
+  padding: 10px;
+  font-size: 25px;
+  color:#f9ece4;
+  background-color: #0d5d6053;
+}
+
+.formInput input:invalid[focused="true"] {
+  border: 1px solid rgb(73, 0, 0);
+}
+
+.formInput input:invalid[focused="true"] ~ span {
+  display: block;
+}
+
+.homenav-signup {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d86519;
+  color: #E4F9F5;
+  top: 0px;
+}
+
+.homenav-signup h1 {
+  font-size: 3rem;
+  padding-top: 5px;
+  padding-bottom: 15px;
+  padding-left: 80px;
+}
+
+.homenav-signup a {
+font-weight: 500;
+font-size: 1.2em;
+margin-left: 16px;
+text-decoration: none;
+padding: 6px;
+color: #E4F9F5;
+cursor: pointer;
+}
+
+.homenav-signup a:active {
+color: #f1356d;
+border-bottom: 2px solid #b46422;
+}
+
+.homenav-signup a:hover {
+color: #f1356d;
+}
