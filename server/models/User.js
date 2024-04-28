@@ -33,6 +33,10 @@ const UserSchema = Schema({
     lowercase: true,
     unique: true,
   },
+  emailConfirmed: {
+    type: Boolean,
+    default: false
+  },
   image: {
     data: Buffer,
     contentType: String,

@@ -1,9 +1,12 @@
 // server/controllers/auth.controller.js
 
+const randToken = require('rand-token');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const {
-  User
+  User,
+  ConfirmToken,
+  ResetToken
 } = require(process.env.MODELS);
 const {
   emailService
@@ -12,10 +15,8 @@ const {
 module.exports = {
   /**
    * Creates new User.
-   * Next should call login handler.
    * @param {Request} req request
    * @param {Response} res response
-   * @param {Function} next next handler
    */
   register: async (req, res, next) => {
     const {
@@ -34,13 +35,13 @@ module.exports = {
         });
       }
 
-      await User.create({
+      const user = await User.create({
         firstName,
         secondName,
         email,
         password
       });
-      emailService.sendCongratulations(email, firstName);
+      req.user = user;
     } catch (error) {
       console.error(error);
       res.status(500);
@@ -49,8 +50,83 @@ module.exports = {
         message: 'Register Error'
       });
     }
-    // login handler
+    // sendConfirmEmail handler
     next();
+  },
+  /**
+   * Sends confirmation email
+   * @param {Request} req request
+   * @param {Response} res response
+   * @returns 
+   */
+  sendConfirmEmail: async (req, res) => {
+    const {
+      email
+    } = req.body;
+
+    try {
+      const baseUrl = process.env.BASE_URL || 'http://localhost:3812';
+
+      const user = await User.findOne({ email: email });
+      const confirmToken = await ConfirmToken.create({ user: user });
+      const link = `${baseUrl}/api/auth/confirm/${confirmToken.token}`;
+      
+      await emailService.sendConfirmation(email, link);
+      res.status(200);
+      return res.json({
+        success: true,
+        message: 'Confirmation letter sent'
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500);
+      return res.json({
+        success: false,
+        message: 'Send confirmation letter Error'
+      });
+    }
+  },
+  /**
+   * Confirms users's email.
+   * Next should call login handler.
+   * @param {Request} req request
+   * @param {Response} res response
+   * @param {Function} next next handler
+   */
+  confirmEmail: async (req, res, next) => {
+    const {
+      token
+    } = req.params;
+
+    try {
+      const confirmToken = await ConfirmToken.findOne({ token: token });
+      if (!confirmToken) {
+        res.status(404);
+        return res.json({
+          success: false,
+          message: 'Token expired'
+        });
+      }
+      const user = await User.findById(confirmToken.user);
+      user.emailConfirmed = true;
+      await user.save();
+      ConfirmToken.deleteOne({ token: token });
+
+      await emailService.sendCongratulations(user.email, user.firstName);
+
+      res.status(200);
+      return res.json({
+        success: true,
+        message: 'Email confirmed'
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500);
+      return res.json({
+        success: false,
+        message: 'Confirm Email Error'
+      });
+    }
   },
   /**
    * Authorizes User
@@ -79,6 +155,15 @@ module.exports = {
         return res.json({
           success: false,
           message: 'Invalid credentials'
+        });
+      }
+      // checking if email is confirmed
+      // IMPORTANT
+      if (!user.emailConfirmed) {
+        res.status(403);
+        return res.json({
+          success: false,
+          message: 'Confirm your email address'
         });
       }
       // generating token
@@ -113,16 +198,25 @@ module.exports = {
   },
   /**
    * Unauthentificates User
+   * @param {Request} req request
    * @param {Response} res response
-   * @returns 
    */
-  logout: (res) => {
-    res.clearCookie('authToken');
-    res.status(200);
-    return res.json({
-      success: true,
-      message: 'Logged out'
-    });
+  logout: (req, res) => {
+    try {
+      res.clearCookie('authToken');
+      res.status(200);
+      return res.json({
+        success: true,
+        message: 'Logged out'
+      });
+    } catch(error) {
+      console.error(error);
+      res.status(500);
+      return res.json({
+        success: false,
+        message: 'Logout Error'
+      });
+    }
   },
   /**
    * Sends reset link to User's email

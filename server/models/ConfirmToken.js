@@ -1,4 +1,4 @@
-// server/models/ResetToken.js
+// server/models/ConfirmToken.js
 
 const {
   Schema,
@@ -7,7 +7,7 @@ const {
 } = require("mongoose");
 const randToken = require('rand-token');
 
-const ResetTokenShema = Schema({
+const ConfirmTokenShema = Schema({
   user: {
     type: Types.ObjectId,
     ref: 'User',
@@ -17,18 +17,18 @@ const ResetTokenShema = Schema({
   token: {
     type: String,
     unique: true,
-    default: () => randToken.generate(20)
+    default: () => randToken.generate(12)
   },
   expireAt: {
     type: Date,
     default: new Date(),
-    expires: "1h",
+    expires: "24h",
   }
 });
 
-ResetTokenShema.methods.toJSON = () => {
-  const { _id, __v, ...resetToken } = this.toObject();
-  return resetToken;
+ConfirmTokenShema.methods.toJSON = () => {
+  const { _id, __v, ... confirmToken } = this.toObject();
+  return confirmToken;
 };
 
-module.exports = model("ResetToken", ResetTokenShema);
+module.exports = model("ConfirmToken", ConfirmTokenShema);
