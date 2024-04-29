@@ -1,10 +1,10 @@
-// server/controllers/index.controller.js
+// server/services/index.service.js
 
 const fs = require('fs');
 const path = require('path');
 const basename = path.basename(__filename);
 
-const controllers = {};
+const services = {};
 
 fs.readdirSync(__dirname)
 .filter(file => {
@@ -12,13 +12,13 @@ fs.readdirSync(__dirname)
     file.indexOf('.') !== 0 &&
     file !== basename &&
     file.slice(-3) === '.js' &&
-    file.indexOf('.controller.js') !== -1
+    file.indexOf('.service.js') !== -1
     );
   })
 .forEach(file => {
-  const controller = require(path.join(__dirname, file));
-  const name = file.replace('.controller.js', '');
-  controllers[name] = controller;
+  const service = require(path.join(__dirname, file));
+  const name = file.replace('.service.js', '') + 'Service';
+  services[name] = service;
 });
 
-module.exports = controllers;
+module.exports = services;

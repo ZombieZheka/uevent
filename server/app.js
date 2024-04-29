@@ -9,6 +9,7 @@ const dbConnection = require("./config/database");
 dotevn.config();
 const root = path.resolve(__dirname);
 process.env.MODELS = path.join(root, 'models/index');
+process.env.PUBLIC_DIR = path.join(root, 'public');
 // process.env.CONFIG = path.join(root, 'config/index');
 process.env.SERVICES = path.join(root, 'services/index.service');
 process.env.MIDDLEWARES = path.join(root, 'middlewares/index.middleware');
@@ -46,5 +47,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.json(err);
 });
+
+if (process.env.NODE_ENV === 'test') {
+  const runTests = require('./tests/index.test');
+  runTests();
+}
 
 module.exports = app;
