@@ -1,5 +1,6 @@
 // server/routes/auth.router.js
 
+const { check } = require('express-validator');
 const express = require('express');
 const router = express.Router();
 
@@ -9,14 +10,14 @@ const { auth } = require(process.env.CONTROLLERS);
 router.post(
   '/register',
   [
-    // check('name', 'Name is required').not().isEmpty(),
-    // check('name', 'Name length must be max 32 characters').isLength({max: 32}),
-    // check("email", "Invalid email").isEmail(),
-    // check("password", "Password is required").not().isEmpty(),
-    // check('password', 'Password should be between 8-32 characters').isLength({min: 8, max: 32}),
-    // check('password', 'Password should include number, symbol, lowercase and uppercase letter').isStrongPassword(),
-    // validateFields,
-    // emailExists
+    check('firstName', "First Name is required").not().isEmpty(),
+    check('firstName', "First Name length must be max 32 characters").isLength({max: 32}),
+    check('secondName', "Second Name is required").not().isEmpty(),
+    check('secondName', "Second Name length must be max 32 characters").isLength({max: 32}),
+    check('email', "Invalid email").isEmail(),
+    check('password', "Password is required").not().isEmpty(),
+    check('password', "Password should be between 8-32 characters").isLength({min: 8, max: 32}),
+    check('password', "Password should include number, symbol, lowercase and uppercase letter").isStrongPassword(),
   ],
   auth.register,
   auth.sendConfirmEmail
@@ -38,9 +39,8 @@ router.get(
 router.post(
   '/login',
   [
-    // check("email", "Invalid email").isEmail(),
-    // check("password", "Password is required").not().isEmpty(),
-    // validateFields
+    check('email', "Invalid email").isEmail(),
+    check('password', "Password is required").not().isEmpty(),
   ],
   auth.login
 );
