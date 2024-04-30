@@ -35,11 +35,12 @@ const CreateEvent = () => {
 
 
     const genre_options = [
-        {value: 'misc', label: 'Miscellaneous'},
-        {value: 'music', label: 'Music'},
-        {value: 'art', label: 'Art'},
-        {value: 'drama', label: 'Drama'},
+        {value: 'sport', label: 'Sport'},
+        {value: 'science', label: 'Science'},
+        {value: 'travelling', label: 'Travelling'},
+        {value: 'work', label: 'Work'},
         {value: 'entertainment', label: 'Entertainment'},
+        {value: 'dancing', label: 'Dancing'},
     ];
 
     const duration_options = [
@@ -241,7 +242,7 @@ const CreateEvent = () => {
                                         className='genre'
                                         options={genre_options}
                                         onChange={genre_select}
-                                        defaultValue={{value: 'misc', label: 'Miscellaneous'}}
+                                        defaultValue={{value: 'sport', label: 'Sport'}}
                                         isMulti
                                         required
                                     />
@@ -361,9 +362,7 @@ const CreateEvent = () => {
                     <img className='stock-image' id='stock2.jpg' onClick={handleStockImage} alt='stock' src='http://localhost:4000/api/image/event/stock2.jpg' />
                     <img className='stock-image' id='stock3.jpg' onClick={handleStockImage} alt='stock' src='http://localhost:4000/api/image/event/stock3.jpg' /> 
                     <img className='stock-image' id='stock4.jpg' onClick={handleStockImage} alt='stock' src='http://localhost:4000/api/image/event/stock4.jpg' />
-                    <img className='stock-image' id='stock5.jpg' onClick={handleStockImage} alt='stock' src='http://localhost:4000/api/image/event/stock5.jpg' />
-                    <img className='stock-image' id='stock6.jpg' onClick={handleStockImage} alt='stock' src='http://localhost:4000/api/image/event/stock6.jpg' />
-                </div>
+                    </div>
             </ImgPopup>
 
             <div>

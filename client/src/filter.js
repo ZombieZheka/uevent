@@ -47,11 +47,12 @@ const Filter = ({handleFilter}) => {
                             <label htmlFor='type'>Genre</label>
                             <select className='type' onChange={(e)=>{setEventGenre(e.target.value)}}>
                                 <option value= ''></option>
-                                <option value='music'>Music</option>
-                                <option value='drama'>Drama</option>
-                                <option value='art'>Art</option>
-                                <option value='entertainment'>Entertainment</option>
-                                <option value='misc'>Miscellaneous</option>
+                                <option value='sport'>Sport</option>
+                                <option value='science'>Science</option>
+                                <option value='travelling'>Travelling</option>
+                                <option value='work'>Work</option>
+                                <option value='Entertainment'>Entertainment</option>
+                                <option value='dancing'>Dancing</option>
                             </select>
                         </div>
 

@@ -83,7 +83,6 @@
     font-size: 1.5rem;
     position: relative;
     bottom: 10px;
-    animation: 1s;
 }
 .links-third:hover::after {
     content: 'Post';
