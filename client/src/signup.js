@@ -153,7 +153,7 @@ export default function SignUp() {
         {!userPending && <button>Create User</button> }
         {userPending && <button>Creating User...</button> }
         {isUserDuplicate && <span className='user-duplicate'>Username already in use!</span>}
-        {isUserCreated && <div><br/><span className='user-created'>Welcome aboard! Please use the login page to log into your account. Redirecting shortly</span></div>}
+        {isUserCreated && <div><br/><span className='user-created'>Redirecting..</span></div>}
       </form>
     </div>
     );

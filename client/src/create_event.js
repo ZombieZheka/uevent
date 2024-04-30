@@ -218,22 +218,6 @@ const CreateEvent = () => {
                             </div>
 
                             <br></br>
-                            <br></br>
-
-                            <div className='description-body'>
-                                <label htmlFor='description'>Description</label>
-                                <br></br>
-                                <br></br>
-                                <textarea 
-                                    className='description'
-                                    value = {event_desc}
-                                    onChange = {(e)=> setDesc(e.target.value)}
-                                    required
-                                ></textarea>
-                            </div>
-                        </div>
-                        
-                        <div className='right'>
                             <div className="my-flex">
                                 <label htmlFor='genre'>Genre</label>
 
@@ -278,9 +262,24 @@ const CreateEvent = () => {
                                     />
                                 </div>
                             </div>
-
-                            <br></br>
-    
+                            
+                        </div>
+                        
+                        
+                        <div className='right'>
+                            
+                            <div className='description-body'>
+                                <label htmlFor='description'>Description</label>
+                                <br></br>
+                                <br></br>
+                                <textarea 
+                                    className='description'
+                                    value = {event_desc}
+                                    onChange = {(e)=> setDesc(e.target.value)}
+                                    required
+                                ></textarea>
+                            </div>
+                            
                             <div className='event-image'>
                                 <div className='image-preview'>
                                     <label>Image Preview</label>
