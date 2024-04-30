@@ -3,6 +3,7 @@
 }
 
 .create-event header {
+    text-align: center;
     position: relative;
     left: 5%;
     top: 90px;
@@ -17,15 +18,10 @@
     color: #ff9854;
 }
 
-.create-event header p {
-    display: inline-block;
-    font-size: 1.2em;
-    padding-left: 2vw;
-}
 
 .create-event-body {
     position: absolute;
-    top:27%;
+    top:210px;
     left: 7%;
 }
 

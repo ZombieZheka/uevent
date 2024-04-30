@@ -92,7 +92,7 @@ export default function Login() {
             </div>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <form className='my-form' onSubmit={handleSubmit}>
             <h3>Login</h3>
             <br />
             {inputs.map((input) => (

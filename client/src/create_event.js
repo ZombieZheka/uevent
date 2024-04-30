@@ -164,9 +164,8 @@ const CreateEvent = () => {
             <header>
                 <h1>Create Event</h1>
                 <br></br>
-                <p>Create your own event and make it visible to all!</p>
                 <br></br>
-                <br></br>
+
             </header>
 
             <div className='create-event-body'>

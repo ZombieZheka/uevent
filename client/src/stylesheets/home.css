@@ -16,30 +16,32 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-    background: #40514E;
+    background: #514840;
     border-radius: 1px;
 }
 
-/*-----------------Top PART------------------------*/
 
-.hometop {
-    display: relative;
-    overflow-y: hidden;
+.homebody {
+    background-color: black; 
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 .homebody {
     display: flex;
     justify-content: center;
     text-align: center;
-    margin-top: 80px;
     align-items: center; 
-    height: calc(100vh - 82px); 
+    height:100vh; 
     background-color: rgba(41, 74, 77, 0.843);
     background-image: url(../images/homebg1.jpg);
     background-size: cover;
     background-blend-mode: multiply;
-    border-bottom: 1.5px solid black;
-    border-top: 1.5px solid black;
+    opacity: 0;
+    animation: fadeInContent 2s forwards; 
 }
 
 .get-started {
@@ -52,6 +54,9 @@ body::-webkit-scrollbar-thumb {
     font-weight: 600;
     border: none;
     border-radius: 10px;
+    opacity: 0;
+    animation: fadeInButton 1s forwards;
+    animation-delay: 4s;
 }
 
 .get-started:hover{
@@ -65,50 +70,51 @@ body::-webkit-scrollbar-thumb {
     height: auto;
 }
 
-.homebody .content h2 {
-    font-size: 5.5em;
+.homebody .content h1 {
+    opacity: 0; 
+    transform: translateY(-20px); 
+    animation: fadeInLine 1s forwards;
+    animation-delay: 3.3s;
 }
 .homebody .content h3 {
     font-size: 4em;
+    opacity: 0; 
+    transform: translateY(-20px); 
+    animation: fadeInLine 2s forwards;
+    animation-delay: 0.5s;
 }
 .homebody .content h4 {
     font-size: 3em;
+    opacity: 0; 
+    transform: translateY(-20px); 
+    animation: fadeInLine 2s forwards;
+    animation-delay: 1.5s;
 }
 
-.homebody .content p {
-    font-size: 1.2em;
+@keyframes fadeInLine {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInContent {
+    0% {
+        opacity: 0; 
+    }
+    100% {
+        opacity: 1; 
+    }
 }
 
-.container {
-    position: relative;
-}
-
-.homefeatures {
-    display: flex;
-    justify-content: space-evenly;
-    background-color: #ffffff;
-    padding-top: 80px;
-    padding-bottom: 120px;
-}
-
-.search, .join, .organize {
-    padding-right: 100px;
-    padding-left: 100px;
-    display: flex;
-    width: 450px;
-}
-
-.homefeatures img {
-    width: 90px;
-    padding: 5px 20px;
-}
-
-.homefeatures h3 {
-    color: rgb(204, 96, 34); /* новый оттенок */
-    font-size: 2em;
-}
-
-.homefeatures p {
-    color: #b46922;
-    font-size: 1.3em;
+@keyframes fadeInButton {
+    0% {
+        opacity: 0; 
+    }
+    100% {
+        opacity: 1; 
+    }
 }

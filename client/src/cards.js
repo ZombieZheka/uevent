@@ -5,6 +5,10 @@ import CardDesc from './enlarge_card';
 import EventComments from './eventComments';
 import { store } from './redux/store';
 
+
+import like_btn from './images/like.png';
+import liked_btn from './images/liked.png';
+
 const Cards = ({cards, inProfile, currentUser, handleRerender, sameUser, notInLiked}) => {
 
 
@@ -306,8 +310,8 @@ const Cards = ({cards, inProfile, currentUser, handleRerender, sameUser, notInLi
                             </div>
 
                             <div className='popup-event-like'>
-                                {!userHasLiked && <img className='event-like-btn' src="https://img.icons8.com/wired/64/null/hearts.png" onClick={handleLike}  id={card.user_id} alt='like'/>}
-                                {userHasLiked && <img className='event-like-btn' src="https://img.icons8.com/dusk/64/null/hearts.png" onClick={handleLike} alt='unlike'/>}
+                                {!userHasLiked && <img className='event-like-btn' src={like_btn} onClick={handleLike}  id={card.user_id} alt='like'/>}
+                                {userHasLiked && <img className='event-like-btn' src={liked_btn} onClick={handleLike} alt='unlike'/>}
                                 <p className='event-likes-no'>{card.event_likes}</p>
                             </div>
                         </div>

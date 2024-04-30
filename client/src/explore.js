@@ -51,7 +51,7 @@ const Explore = () => {
         border: 'none',
         borderRadius: '10px',
         cursor: 'pointer',
-        backgroundColor: '#22cca4',
+        backgroundColor: '#cc6e22',
         color: '#E4F9F5'
     }
 
@@ -59,9 +59,8 @@ const Explore = () => {
         <div>
             <Navbar />
             <div className='explore-header'>
-                <h1>Explore Events</h1>
                 <br></br>
-                <p>Find events created by people in the community</p>
+                <h1>Find Events</h1>
                 <br></br>
                 <br></br>
                 <div className='sort'>

@@ -138,7 +138,7 @@ export default function SignUp() {
             </div>
         </div>
 
-      <form onSubmit={handleSubmit}>
+      <form className='my-form' onSubmit={handleSubmit}>
         <h3>Sign up</h3>
         <br />
         {inputs.map((input) => (

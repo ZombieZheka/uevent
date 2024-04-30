@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './stylesheets/explore.css';
+
 const Filter = ({handleFilter}) => {
     
    
@@ -40,50 +42,55 @@ const Filter = ({handleFilter}) => {
     return (
         <div className='filters'>
                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor='type'>Genre</label>
-                        <select className='type' onChange={(e)=>{setEventGenre(e.target.value)}}>
-                            <option value= ''></option>
-                            <option value='music'>Music</option>
-                            <option value='drama'>Drama</option>
-                            <option value='art'>Art</option>
-                            <option value='entertainment'>Entertainment</option>
-                            <option value='misc'>Miscellaneous</option>
-                        </select>
+                    <div className='filter-column'>
+                        <div className='filter'>
+                            <label htmlFor='type'>Genre</label>
+                            <select className='type' onChange={(e)=>{setEventGenre(e.target.value)}}>
+                                <option value= ''></option>
+                                <option value='music'>Music</option>
+                                <option value='drama'>Drama</option>
+                                <option value='art'>Art</option>
+                                <option value='entertainment'>Entertainment</option>
+                                <option value='misc'>Miscellaneous</option>
+                            </select>
+                        </div>
+
+                        <div className='filter'>
+                            <label htmlFor='location'>Location</label>
+                            <input type='text' maxLength={30} className='location' onChange={(e)=>{setEventLocation(e.target.value)}}></input>
+                        </div>
+                        
                     </div>
 
-                    <div>
-                        <label htmlFor='location'>Location</label>
-                        <input type='text' maxLength={30} className='location' onChange={(e)=>{setEventLocation(e.target.value)}}></input>
-                    </div>
+                    <div className='filter-column'>
+                        <div className='filter'>
+                            <label htmlFor='duration'>Duration</label>
+                            <select className='duration' onChange={(e)=>{setEventDuration(e.target.value)}}>
+                                <option value=''></option>
+                                <option value={1}>Half hour</option>
+                                <option value={2}>One Hour</option>
+                                <option value={3}>Two Hours</option>
+                                <option value={4}>Half Day</option>
+                                <option value={5}>Full Day</option>
+                                <option value={6}>More than a Day</option>
+                            </select>
+                        </div>
 
-                    <div>
-                        <label htmlFor='duration'>Duration</label>
-                        <select className='duration' onChange={(e)=>{setEventDuration(e.target.value)}}>
-                            <option value=''></option>
-                            <option value={1}>Half hour</option>
-                            <option value={2}>One Hour</option>
-                            <option value={3}>Two Hours</option>
-                            <option value={4}>Half Day</option>
-                            <option value={5}>Full Day</option>
-                            <option value={6}>More than a Day</option>
-                        </select>
+                        <div className='filter'>
+                            <label htmlFor='age'>Age-Group</label>
+                            <select className='age' onChange={(e)=>{setEventAge(e.target.value)}}>
+                                <option value=''></option>
+                                <option value='child'>Children</option>
+                                <option value='teen'>Teenagers</option>
+                                <option value='adult'>Adults</option>
+                                <option value='all'>Everyone</option>
+                            </select>
+                        </div>
                     </div>
-
-                    <div>
-                        <label htmlFor='age'>Age-Group</label>
-                        <select className='age' onChange={(e)=>{setEventAge(e.target.value)}}>
-                            <option value=''></option>
-                            <option value='child'>Children</option>
-                            <option value='teen'>Teenagers</option>
-                            <option value='adult'>Adults</option>
-                            <option value='all'>Everyone</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <button type='submit'>Filter</button>
+                    
+                    <div className='filter-column-end'>
                         <button type='reset' onClick={handleReset}>Clear</button>
+                        <button className='filter-button' type='submit'>Filter</button>
                     </div>
                 </form>
             </div>
