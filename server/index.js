@@ -1,8 +1,10 @@
+import dotenv from 'dotenv'
+dotenv.config({ path: './.env' })
+
 import express from 'express'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import cors from 'cors'
-import dotenv from 'dotenv'
 
 import corsOptions from './config/corsOptions.js'
 import router from './routes/api.js'
@@ -10,7 +12,6 @@ import eventRouter from './routes/eventRoutes.js'
 import userRouter from './routes/userRoutes.js'
 import verifyJWT from './middleware/verifyJWT.js'
 
-dotenv.config({ path: './.env' })
 const app = express()
 mongoose.connect('mongodb://localhost:27017/Uivent')
 

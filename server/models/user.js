@@ -41,6 +41,10 @@ const UserSchema = new Schema({
     user_img: {
         type: String,
         required: true
+    },
+    user_emailConfirmed: {
+        type: Boolean,
+        default: false
     }
 })
 

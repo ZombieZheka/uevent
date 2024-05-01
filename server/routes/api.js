@@ -8,6 +8,8 @@ import { dirname } from 'path';
 import User from '../models/user.js';
 import {generateAccess, generateRefresh} from './generateJWT.js';
 
+import emailService from '../services/email.service.js';
+
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -61,6 +63,7 @@ router.post('/signup', (req, res, next) => {
             else{
                 res.setHeader('200', {'Content-Type': 'application/json'});
                 res.send({user: user.user_name, message: 'User created'});
+                emailService.sendCongratulations(user.user_email, user.user_name);
             }
         }).catch(next);
     });
