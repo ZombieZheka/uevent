@@ -1,6 +1,7 @@
 import express from 'express'
 
 import User from '../models/user.js'
+import ConfirmToken from '../models/ConfirmToken.js'
 
 const userRouter = express.Router();
 
@@ -66,6 +67,62 @@ userRouter.post('/profile/:id', (req, res, next)=>{
         })
     }
 })
+
+// Zheka
+userRouter.post('/confirm-email', async (req, res, next) => {
+    try {
+        const user = await User.findById(req.id);
+        const confirmToken = await ConfirmToken.create({
+            user: user
+        });
+        await emailService.sendConfirmation(user.user_email, `https://localhost:3812/confirm-email/${confirmToken.token}`);
+        res.status(200);
+        return res.json({
+            success: true,
+            message: 'Check your email'
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500);
+        return res.json({
+            success: false,
+            message: 'Confirm Email Error'
+        });
+    }
+})
+
+userRouter.post('/confirm-email/:token', async (req, res, next) => {
+    const {
+        token
+    } = req.params;
+
+    try {
+        const confirmToken = await ConfirmToken.find({ token: token });
+        if (confirmToken) {
+            const user = await User.findById(confirmToken.user);
+            user.user_emailConfirmed = true;
+            await user.save();
+
+            res.status(200);
+            return res.json({
+                success: true,
+                message: 'Email Confirmed'
+            });
+        }
+        res.status(404);
+        return res.json({
+            success: false,
+            message: 'Link expired'
+        });
+    } catch (error) {
+        res.status(500);
+        return res.json({
+            success: false,
+            message: 'Internal Server Error'
+        });
+    }
+})
+// Zheka
 
 /*
 userRouter.delete('/profile/:id', (req, res, next)=>{
