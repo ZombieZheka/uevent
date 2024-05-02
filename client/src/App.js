@@ -6,7 +6,7 @@ import { PreviewContainer } from "./payment/features/preview/Preview";
 import { StatusContainer } from "./payment/features/status/Status";
 import { CancelContainer } from "./payment/features/cancel/Cancel";
 import { Home1 } from "./payment/features/home/Home";
-
+import ConfirmationPage from './СonfirmationPage';
 import Explore from "./explore";
 import Home from './home';
 import SignUp from "./signup";

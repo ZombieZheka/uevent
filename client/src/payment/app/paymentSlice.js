@@ -56,7 +56,7 @@ export const slice = createSlice({
 
 //console.error(process.env.REACT_APP_ADYEN_CLIENT_KEY);
 export const { paymentSession, clearPaymentSession, paymentDataStore } = slice.actions;
-console.error(slice.actions);
+//console.error(slice.actions);
 export const initiateCheckout = (type) => async (dispatch) => {
   const response = await fetch(`http://localhost:4000/api/sessions?type=${type}`, {
     method: "POST",

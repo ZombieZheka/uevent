@@ -55,7 +55,7 @@ async function sendEmail(options) {
  */
 async function sendConfirmation(email, link) {
     const mailOptions = {
-        template: 'confiramtion',
+        template: 'confirmation',
         context: {
             link
         },
