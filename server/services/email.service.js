@@ -60,7 +60,7 @@ async function sendConfirmation(email, link) {
       link
     },
 
-    from: 'Usof Team',
+    from: 'Uevent Team',
     to: email,
     subject: 'Confirm your email'
   };
@@ -82,7 +82,7 @@ async function sendCongratulations(email, name) {
       name
     },
 
-    from: 'Usof Team',
+    from: 'Uevent Team',
     to: email,
     subject: 'Congratulations'
   };
@@ -104,7 +104,7 @@ async function sendReset(email, link) {
       link
     },
 
-    from: 'Usof Team',
+    from: 'Uevent Team',
     to: email,
     subject: 'Reset Password'
   };

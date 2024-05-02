@@ -1,7 +1,5 @@
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { logout, reset } from './features/auth/authSlice'; 
 const Home = () => {
 
     const navigate = useNavigate();

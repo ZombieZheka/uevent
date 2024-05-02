@@ -65,12 +65,13 @@
 
 .filter-column {
 width: 320px;
+margin: 0 20px;
 }
 .filters form{
     padding: 90px 40px 0 40px;
     height: 80%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 
 }
 

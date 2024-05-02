@@ -151,4 +151,40 @@ router.post('/image/user', uploadProfile.single('user_img'), (req, res, next)=> 
     res.send({message: 'Image Uploaded', imgPath: profileImageName});
 })
 
+router.post('/sendConfirmationEmail', async (req, res) => {
+    const { email, link } = req.body;
+
+    try {
+        await emailService.sendConfirmation(email, link);
+        res.status(200).json({ message: 'Письмо с подтверждением успешно отправлено' });
+    } catch (error) {
+        console.error('Ошибка отправки письма с подтверждением:', error);
+        res.status(500).json({ error: 'Внутренняя ошибка сервера' });
+    }
+});
+
+router.get('/confirm-email/:id', async (req, res, next) => {
+    try {
+        const userId = req.params.id;
+        
+        // Find the user in the database using the userId
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'Пользователь не найден' });
+        }
+
+        // Update the user_emailConfirmed field to true
+        user.user_emailConfirmed = true;
+        await user.save();
+
+        return res.status(200).json({ message: 'Email подтвержден успешно' });
+    } catch (error) {
+        console.error('Ошибка при подтверждении email:', error);
+        return res.status(500).json({ message: 'Ошибка при подтверждении email' });
+    }
+});
+
+
+
 export default router

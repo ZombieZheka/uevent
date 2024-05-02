@@ -8,6 +8,8 @@ import Login from "./login";
 import CreateEvent from "./create_event";
 import ProfilePage from "./profile";
 
+import ConfirmationPage from './СonfirmationPage';
+
 function App() {
     return(
     <div className='app'>
@@ -18,6 +20,7 @@ function App() {
             <Route path="/explore" element={<Explore />}/>
             <Route path="/create" element={<CreateEvent />}/>
             <Route path="/profile/:handle" element={<ProfilePage />}/>
+            <Route path="/api/confirm-email/:id" element={<ConfirmationPage />} />
         </Routes>
     </div>
   );
