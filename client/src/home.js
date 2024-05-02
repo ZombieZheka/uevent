@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 const Home = () => {
@@ -25,19 +24,4 @@ const Home = () => {
             
     );
 }
-=======
-import React from 'react';
-import HomeTop from './home_top';
-
-const Home = () => {
-
-    return (  
-        <div className="home">
-            <HomeTop /> 
-        </div>
-    );
-}
-
- 
->>>>>>> main
 export default Home;

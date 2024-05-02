@@ -92,11 +92,7 @@ export default function Login() {
             </div>
         </div>
 
-<<<<<<< HEAD
         <form className='my-form' onSubmit={handleSubmit}>
-=======
-        <form onSubmit={handleSubmit}>
->>>>>>> main
             <h3>Login</h3>
             <br />
             {inputs.map((input) => (

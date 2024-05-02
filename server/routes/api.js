@@ -187,6 +187,9 @@ router.get('/confirm-email/:id', async (req, res, next) => {
     } catch (error) {
         console.error('Ошибка при подтверждении email:', error);
         return res.status(500).json({ message: 'Ошибка при подтверждении email' });
+        }
+        });
+
 // backend code to handle ticket purchase
 router.post('/purchaseTicket', async (req, res) => {
     try {
@@ -265,4 +268,4 @@ router.post('/tickets', async (req, res) => {
 });
 
 
-export default router
+export default router;
