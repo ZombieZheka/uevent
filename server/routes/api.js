@@ -4,11 +4,16 @@ import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import stripe from 'stripe';
+import pdfkit from 'pdfkit';
+import nodemailer from 'nodemailer';
+import fs from 'fs';
+import emailService from '../service/email.service.js';
+
 
 import User from '../models/user.js';
 import {generateAccess, generateRefresh} from './generateJWT.js';
-
-import emailService from '../services/email.service.js';
+import Ticket from "../models/ticket.js";
 
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
@@ -182,9 +187,82 @@ router.get('/confirm-email/:id', async (req, res, next) => {
     } catch (error) {
         console.error('Ошибка при подтверждении email:', error);
         return res.status(500).json({ message: 'Ошибка при подтверждении email' });
+// backend code to handle ticket purchase
+router.post('/purchaseTicket', async (req, res) => {
+    try {
+        // Extract user ID, event ID, and ticket information from the request body
+        const { userId, eventId, ticketInfo } = req.body;
+
+        // Save the ticket information to the database
+        const newTicket = await Ticket.create({
+            user_id: userId,
+            event_id: eventId,
+            ticket_info: ticketInfo,
+        });
+
+        res.status(200).json({ message: 'Ticket information added successfully.', ticket: newTicket });
+    } catch (error) {
+        console.error('Error adding ticket information to the database:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 });
 
+
+function createTicketPDF(ticketInfo) {
+    const doc = new pdfkit();
+    const pdfPath = __dirname + '/ticket.pdf';
+    doc.pipe(fs.createWriteStream(pdfPath));
+
+    // Add content to the PDF document
+    doc
+        .fontSize(20)
+        .text('Event Ticket', { align: 'center' })
+        .moveDown();
+
+    // Add ticket information to the PDF
+    doc
+        .fontSize(12)
+        .text(`Location: ${ticketInfo.location}`)
+        .text(`Date: ${ticketInfo.date}`)
+        .moveDown();
+
+    doc.end(); // End the document
+    return pdfPath;
+}
+
+router.post('/sendTicketByEmail', async (req, res) => {
+    try {
+        const { email, ticketInfo } = req.body;
+        console.log("Email:", email); // Add this line for debugging
+        console.log("Ticket Info:", ticketInfo);
+        if (!email) {
+            return res.status(400).json({ error: 'No recipient email provided' });
+        }
+        const ticketPdf = createTicketPDF(ticketInfo);
+
+        // Send email with ticket attachment
+        await emailService.sendConfirmationPayment(email, ticketPdf);
+        res.status(200).json({ message: 'Квиток відправлено на вашу електронну адресу.' });
+    } catch (error) {
+        console.error('Помилка відправки квитка по електронній пошті:', error);
+        res.status(500).json({ error: 'Внутрішня помилка сервера' });
+    }
+});
+router.post('/tickets', async (req, res) => {
+    try {
+        const { user_id, event_id } = req.body;
+        const ticketCount = await Ticket.countDocuments({ user_id, event_id });
+
+        if (ticketCount >= 5) {
+            return res.status(400).json({ error: 'Максимальна кількість квитків для цієї події вже придбана.' });
+        }else {
+            return  res.status(200);
+        }
+    } catch (error) {
+        console.error('Помилка покупки квитка:', error);
+        res.status(500).json({ error: 'Внутрішня помилка сервера' });
+    }
+});
 
 
 export default router

@@ -5,7 +5,11 @@ import { store } from './redux/store.js'
 import Navbar from './navbar.js';
 import Cards from './cards.js';
 
+<<<<<<< HEAD
 import './stylesheets/profile.css';
+=======
+import './stylesheets/profile.css'
+>>>>>>> main
 
 const ProfilePage = () => {
     
@@ -23,7 +27,10 @@ const ProfilePage = () => {
     const [rerender, setRerender]  = useState();
     const [changeUserBio, setChangeUserBio] = useState('');
     const [user_image, setImage] = useState(null);
+<<<<<<< HEAD
     const [showModal, setShowModal] = useState(false);
+=======
+>>>>>>> main
 
     useEffect(()=>{
 
@@ -136,6 +143,7 @@ const ProfilePage = () => {
         })
     }
 
+<<<<<<< HEAD
     const handleButtonClick = async () => {
         try {
             setShowModal(true); 
@@ -167,6 +175,8 @@ const ProfilePage = () => {
         setShowModal(false);
     };
 
+=======
+>>>>>>> main
     return (
         <div>
             <Navbar inProfile={isSameUser}  handleRerender ={setRerender} />
@@ -208,7 +218,10 @@ const ProfilePage = () => {
                         <div className='profile-user-details-1'>
                             <p className='profile-username'>{userDetails.user_name}</p>
                             {isSameUser && !isUpdating && <button className='profile-update' onClick={()=>{setIsUpdating(true)}}>Edit Profile</button>}
+<<<<<<< HEAD
                             {isSameUser && !userDetails.user_emailConfirmed && !isUpdating && <button className='profile-update' onClick={handleButtonClick}>Confirm Email</button>}
+=======
+>>>>>>> main
                             {isSameUser && isUpdating && <button className='profile-update-cancel' onClick={()=>{setIsUpdating(false)}}>Cancel</button>}
                         </div>
                         <div className='profile-user-details-2'>
@@ -224,7 +237,11 @@ const ProfilePage = () => {
 
                 <div className='profile-toggle'>
                     {!isSameUser && (<button className='profile-toggle-special' onClick={()=>{setShowPosts(true); setShowInterested(false)}}>Posts</button>)}   
+<<<<<<< HEAD
                     {isSameUser && userDetails.user && (<button onClick={()=>{setShowPosts(true); setShowInterested(false)}}>Posts</button>)}
+=======
+                    {isSameUser && (<button onClick={()=>{setShowPosts(true); setShowInterested(false)}}>Posts</button>)}
+>>>>>>> main
                     {isSameUser && (<button onClick={()=>{setShowPosts(false); setShowInterested(true)}}>Liked</button>)}
                 </div>
 
@@ -232,6 +249,7 @@ const ProfilePage = () => {
                     {showPosts && (<Cards cards={userEvents} inProfile={isSameUser} currentUser={store.getState().auth.user.user_id} handleRerender ={setRerender} sameUser={isSameUser} notInLiked={showInterested}/>)}
                     {showInterested && (<Cards cards={interestedEvents} inProfile={isSameUser} currentUser={store.getState().auth.user.user_id} handleRerender ={setRerender} sameUser={isSameUser} notInLiked={showInterested}/>)}
                 </div>
+<<<<<<< HEAD
 
                 
             </div>
@@ -245,6 +263,11 @@ const ProfilePage = () => {
                     </div>
                 </div>
             )}
+=======
+            </div>
+            }
+            
+>>>>>>> main
         </div>
     );
 }

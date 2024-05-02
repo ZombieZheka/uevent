@@ -138,7 +138,11 @@ export default function SignUp() {
             </div>
         </div>
 
+<<<<<<< HEAD
       <form className='my-form' onSubmit={handleSubmit}>
+=======
+      <form onSubmit={handleSubmit}>
+>>>>>>> main
         <h3>Sign up</h3>
         <br />
         {inputs.map((input) => (
@@ -153,7 +157,11 @@ export default function SignUp() {
         {!userPending && <button>Create User</button> }
         {userPending && <button>Creating User...</button> }
         {isUserDuplicate && <span className='user-duplicate'>Username already in use!</span>}
+<<<<<<< HEAD
         {isUserCreated && <div><br/><span className='user-created'>Redirecting..</span></div>}
+=======
+        {isUserCreated && <div><br/><span className='user-created'>Welcome aboard! Please use the login page to log into your account. Redirecting shortly</span></div>}
+>>>>>>> main
       </form>
     </div>
     );
