@@ -34,6 +34,7 @@ const CreateEvent = () => {
     }, [user, navigate])
 
 
+    // IMPORTANT
     const genre_options = [
         {value: 'sport', label: 'Sport'},
         {value: 'science', label: 'Science'},

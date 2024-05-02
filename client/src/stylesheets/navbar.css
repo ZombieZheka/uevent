@@ -13,8 +13,8 @@
 
 .navbar h1 {
     font-size: 3rem;
-    padding-top: 10px;
-    padding-bottom: 13px;
+    padding-top: 5px;
+    padding-bottom: 15px;
     padding-left: 80px;
 }
 
@@ -44,7 +44,7 @@
     align-items: center;
     background-color: #745f3853;
     border-radius: 10px;
-    min-width: 350px;
+    min-width: 420px;
     justify-content:space-evenly;
     height: 75px;
 }
@@ -73,11 +73,10 @@
     font-size: 1.5rem;
     position: relative;
     bottom: 10px;
-    align-items: center;
 }
 
 .links-second:hover::after {
-    content: 'Find';
+    content: 'Explore';
     font-weight: 500;
     color: #ffffff;
     font-size: 1.5rem;

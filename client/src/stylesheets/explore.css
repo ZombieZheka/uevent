@@ -5,13 +5,13 @@
     left: 5%;
     top: 80px;
     width: 90%;
-    border-bottom: 1px solid #cbdcd960; 
+    border-bottom: 1px solid #cbdcd960; /* lighter gray */
 }
 
 .explore-header h1 {
     display: inline-block;
-    font-size: 3.5em;
-    color: #ff9854;
+    font-size: 4em;
+    color: #cc6022; /* Small Header новый оттенок */
     padding-left: 2vw;
 }
 
@@ -42,65 +42,54 @@
 /*-----------------Filters------------------------*/
 
 .filters {
-    top: 320px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #cbdcd960; 
+    position: absolute;
+    top: 25%;
+    height: 65%;
+    min-width: 350px;
+    border-radius: 10px;
+    border-right: 1px solid #dcd4cb8c; /* lighter gray */
 }
 
-.filter {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
-    padding: 10px;
-    width: 100%;
-}
-.filter-column-end {
-    display: flex;
-    flex-direction:column;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 0 30px;
-}
-
-.filter-column {
-width: 320px;
-}
 .filters form{
-    padding: 90px 40px 0 40px;
-    height: 80%;
+    padding: 60px 10px;
+    position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-
+    height: 80%;
 }
 
 .filters form label{
+    padding: 20px;
     font-size: 1.3em;
-    color: #af7722; 
+    color: #af7722; /* новый оттенок */
 }
 
 .filters form input, .filters form select{
     padding: 5px;
+    position: absolute;
     font-size: 1em;
+    left: 42%;
+    width: 45%;
     border: 1px solid #40514E;
-    width: 188px;
     border-radius: 3px;
 }
 
 .filters form select {
-    margin-left: 10px;
-    width: 200px;
     background: none;
+    width: 47.5%;
 }
 
 .filters form input:focus, .filters form select:focus{
-    box-shadow: 0 0 1px 1px rgb(204, 102, 34);
+    box-shadow: 0 0 1px 1px rgb(204, 102, 34); /* Small Header новый оттенок */
     outline: none;
 }
 
 .filters form button{
     font-size: 1.5em;
     padding: 7px;
+    width: 30%;
+    margin: 30px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -111,12 +100,14 @@ width: 320px;
     background-color: #28b830;
 }
 
-.filters form .filter-button {
-    padding: 5px 22px;
-    background-color: #e7d1b8;
-}
-
 /*-----------------CARDS------------------------*/
+
+.cards-body {
+    position: absolute;
+    top:27%;
+    left: 27%;
+    width: 71vw;
+}
 
 .cards {
     display: flex;
@@ -136,7 +127,7 @@ width: 320px;
 .cards .event-preview:hover{
     border-radius: 10px;
     cursor: pointer;
-    box-shadow: 5px 10px #dcd3cbac; 
+    box-shadow: 5px 10px #dcd3cbac; /* Box-shadow новый оттенок */
 }
 
 .cards .event-preview h3{
@@ -251,7 +242,7 @@ width: 320px;
 .popup-event-left {
     width: 60%;
     padding-right: 13px;
-    border-right: 1px solid #dcd3cb60; 
+    border-right: 1px solid #dcd3cb60; /* lighter gray */
 }
 
 .popup-event-like {
@@ -286,12 +277,12 @@ width: 320px;
 .popup-event-header {
     position: relative;
     width: 100%;
-    border-bottom: 1px solid #dcd5cb60; 
+    border-bottom: 1px solid #dcd5cb60; /* lighter gray */
 }
 
 .popup-event-header h1 {
     font-size: 3em;
-    color: #cc6622;
+    color: #cc6622; /* Small Header новый оттенок */
     padding: 1px 10px;
 }
 
@@ -428,14 +419,14 @@ width: 320px;
     display: flex;
     word-wrap: break-word;
     margin-left: 10px;
-    border-bottom: 1px solid #dcd3cb60; 
+    border-bottom: 1px solid #dcd3cb60; /* lighter gray */
     width: 90%;
     padding-bottom: 5px;
 }
 
 .comment-child-body h4 {
     font-size: 1.2em;
-    color: #cc6022;
+    color: #cc6022; /* Small Header новый оттенок */
     cursor: pointer;
 }
 

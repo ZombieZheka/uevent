@@ -5,9 +5,14 @@ import CardDesc from './enlarge_card';
 import EventComments from './eventComments';
 import { store } from './redux/store';
 
-
 import like_btn from './images/like.png';
 import liked_btn from './images/liked.png';
+import {loadStripe} from "@stripe/stripe-js";
+import AdyenCheckout from '@adyen/adyen-web';
+import '@adyen/adyen-web/dist/adyen.css';
+import { Home1 } from "./payment/features/home/Home";
+
+const stripePromise = loadStripe('AQEwhmfxLYnIbR1Aw0m/n3Q5qf3Ve59YCZZETHVRw3y+jmqtznMdF2MgzQuQaoFHS0kPEMFdWw2+5HzctViMSCJMYAc=-+Ro7e5mKqWHdVpQFvbgKC8tfuD5RLbgK1g1bgNMK6/8=-zJ:(9mzHj@b[=h.s');
 
 const Cards = ({cards, inProfile, currentUser, handleRerender, sameUser, notInLiked}) => {
 
@@ -22,6 +27,7 @@ const Cards = ({cards, inProfile, currentUser, handleRerender, sameUser, notInLi
     const [comments, setComments] = useState([]);
     const [eventComment, setEventComment] = useState('');
     const [commentSent, setCommentSent] = useState(false);
+    const [paymentMethod, setPaymentMethod] = useState('');
     
 
     const user_name = store.getState().auth.user.user_name;
@@ -37,6 +43,33 @@ const Cards = ({cards, inProfile, currentUser, handleRerender, sameUser, notInLi
             })
         })
     }, [])
+
+    /*const handleClick = (e) => {
+        const eventId = e.currentTarget.getAttribute('data-value');
+        fetch(`http://localhost:4000/tickets`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_id, event_id: eventId }),
+        }).then(async (response) => {
+            const result = await response.json();
+            if (response.ok) {
+                setPopup(true);
+                fetch(`http://localhost:4000/dash/event/default?event_name=${eventId}`, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer: ' + store.getState().auth.user.accessToken }
+                }).then((response) => {
+                    response.json().then((body) => {
+                        setCard(body[0]);
+                    })
+                })
+            } else {
+                alert(result.error);
+            }
+        }).catch((error) => {
+            console.error('Помилка перевірки доступності квитків:', error);
+            alert('Помилка перевірки доступності квитків:', error);
+        });
+    }*/
 
     useEffect(()=>{
         if(card){
@@ -211,7 +244,6 @@ const Cards = ({cards, inProfile, currentUser, handleRerender, sameUser, notInLi
         })
     }
 
-
     const handleClick = (e) => {
         if(!popup){
             setPopup(true)
@@ -257,6 +289,34 @@ const Cards = ({cards, inProfile, currentUser, handleRerender, sameUser, notInLi
             navigate(`/profile/${e.target.getAttribute('id')}`)
         }   
     }
+
+    const purchaseTicket = async (eventId) => {
+        try {
+            const userId = store.getState().auth.user.user_id;
+            const ticketInfo = { eventId };
+
+            const response = await fetch("http://localhost:4000/api/purchaseTicket", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    userId,
+                    eventId,
+                    ticketInfo,
+                }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data.message);
+            } else {
+                console.error("Failed to purchase ticket:", response.statusText);
+            }
+        } catch (error) {
+            console.error("Error purchasing ticket:", error);
+        }
+    };
 
     return (
         <div className='cards'>
@@ -310,9 +370,12 @@ const Cards = ({cards, inProfile, currentUser, handleRerender, sameUser, notInLi
                             </div>
 
                             <div className='popup-event-like'>
-                                {!userHasLiked && <img className='event-like-btn' src={like_btn} onClick={handleLike}  id={card.user_id} alt='like'/>}
-                                {userHasLiked && <img className='event-like-btn' src={liked_btn} onClick={handleLike} alt='unlike'/>}
+                                {!userHasLiked && <img className='event-like-btn' src="https://img.icons8.com/wired/64/null/hearts.png" onClick={handleLike}  id={card.user_id} alt='like'/>}
+                                {userHasLiked && <img className='event-like-btn' src="https://img.icons8.com/dusk/64/null/hearts.png" onClick={handleLike} alt='unlike'/>}
                                 <p className='event-likes-no'>{card.event_likes}</p>
+                            </div>
+                            <div className="cards">
+                                <Home1/>
                             </div>
                         </div>
 
